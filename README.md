@@ -1,1 +1,1 @@
-Playground for trying out [PyOpt](http://www.pyopt.org/index.html).
+Playground for trying out optimization tools in Python.
