@@ -1,0 +1,1 @@
+Playground for trying out [PyOpt](http://www.pyopt.org/index.html).
