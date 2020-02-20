@@ -148,8 +148,6 @@ class NeuralModel:
 
     start_time = time.time()
     for t in range(num_timesteps):
-      if t % 100 == 0:
-        print("Timestep %d out of %d" % (t, num_timesteps))
       dyn.integrate(dyn.t + dt)
       v_arr = dyn.y[:N]
       s_arr = dyn.y[N:]
