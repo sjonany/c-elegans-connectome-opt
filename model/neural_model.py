@@ -47,10 +47,6 @@ class NeuralModel:
 
     self.compute_Vth()
 
-  @staticmethod
-  def nA_to_arbs(nA):
-    return nA * 10000
-
   def compute_Vth(self):
     """
     Vth computation that I wrote from scratch, and that matches my math derivations more.
