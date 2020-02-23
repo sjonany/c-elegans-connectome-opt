@@ -24,7 +24,9 @@ def get_random_connectome(N):
   Return Gg (NxN), Gs (NxN), is_inhibitory (Nx1)
   This is the configuration used by Jimin, where we see stable oscillation with just 3 neurons.
   """
-  compact_vec = np.random.rand(num_gg_compact(N) + num_gs_compact(N))
+  # TODO: Remove this centering of initial condition
+  compact_vec = [8, 5, 2, 7, 7, 7, 2, 8, 3] + np.random.rand(num_gg_compact(N) + num_gs_compact(N))
+  # compact_vec = 5 + np.random.rand(num_gg_compact(N) + num_gs_compact(N))
   Gg, Gs = compact_to_model_param(compact_vec, N)
   # TODO: Discuss with team what fixed is_inhibitory do we want. For now I'll just hardcode to Jimin's
   is_inhibitory = np.array([1, 0 ,0]) # np.array([1] * N)
