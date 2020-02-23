@@ -3,6 +3,7 @@ Utility functions for generating or manipulating connectomes
 """
 import numpy as np
 import numpy.ma as ma
+import pdb
 
 def get_jimin_3neuron_connectome():
   """
