@@ -4,6 +4,11 @@ import pdb
 import time
 
 class NeuralModel:
+  """
+  A model of C-elegans V(t) dynamics
+  Code adapted from https://github.com/shlizee/C-elegans-Neural-Interactome/blob/master/initialize.py
+  """
+
   def __init__(self, N, Gg, Gs, is_inhibitory, I_ext):
     """
     N - number of neurons
@@ -77,7 +82,6 @@ class NeuralModel:
     m4 = self.Gg
 
     A = m1 + m2 + m3 + m4
-    # TODO: Create a mode where you don't use moving Vth.
     # b = b1 + b3
     b = b1 + b3 - self.I_ext
     self.A = A
@@ -128,7 +132,7 @@ class NeuralModel:
       s_mat (num_timesteps x N): Each column is an activation timeseries of a neuron's synaptic current.
       v_normalized_mat (num_timesteps x N): v_mat, but normalized just like the exported dynamics file from Interactome.
         Note that interactome's exported data starts from timestep 50 onwards, so make sure to truncate first 50 if you
-        want to compare. See milestone_responsive.ipynb for how to do this.
+        want to compare.
     """
 
     N = self.N
