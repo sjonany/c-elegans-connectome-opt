@@ -18,6 +18,8 @@ class NeuralModel:
     self.E = -48.0 * is_inhibitory
     self.I_ext = I_ext
 
+    # Or else we have uncomparable results across optimization runs
+    np.random.seed(0)
     self.init_conds = 10**(-4)*np.random.normal(0, 0.94, 2*self.N)
 
     self.dt = 0.01
