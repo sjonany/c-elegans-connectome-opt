@@ -5,6 +5,7 @@ https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master
 
 import numpy as np
 import tensorflow.compat.v1 as tf
+import pdb
 # Morvan's code is against TF 1.0
 tf.disable_v2_behavior() 
 
@@ -91,7 +92,6 @@ class PolicyGradient:
     def learn(self):
         # discount and normalize episode reward
         discounted_ep_rs_norm = self._discount_and_norm_rewards()
-
         # train on episode
         self.sess.run(self.train_op, feed_dict={
              self.tf_obs: np.vstack(self.ep_obs),  # shape=[None, n_obs]
