@@ -90,8 +90,11 @@ class PolicyGradient:
         self.ep_rs.append(r)
 
     def learn(self):
+        # This used to be self._discount_and_norm_rewards()
+        # But, it didn't make sense to me. I want to always discourage actions that lead to
+        # negative rewards. Hrm, maybe this assumption is only valid in convex opts. Not sure.
         # discount and normalize episode reward
-        discounted_ep_rs_norm = self._discount_and_norm_rewards()
+        discounted_ep_rs_norm = self._get_normed_ep_rs()
         # train on episode
         self.sess.run(self.train_op, feed_dict={
              self.tf_obs: np.vstack(self.ep_obs),  # shape=[None, n_obs]
@@ -101,6 +104,14 @@ class PolicyGradient:
 
         self.ep_obs, self.ep_as, self.ep_rs = [], [], []    # empty episode data
         return discounted_ep_rs_norm
+
+    def _get_normed_ep_rs(self):
+      normed_ep_rs = self.ep_rs - np.mean(self.ep_rs)
+      std = np.std(normed_ep_rs)
+      if std == 0:
+        # We achieved optimality. Make the reward be 5 * stddev or reward distribution.
+        return np.array([5.0] * len(normed_ep_rs))
+      return normed_ep_rs / np.std(normed_ep_rs)
 
     def _discount_and_norm_rewards(self):
         # discount episode rewards
